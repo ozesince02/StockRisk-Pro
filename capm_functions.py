@@ -62,11 +62,11 @@ def plot_investment_period(df, stock_selected, time):
     last_day_df = df.iloc[[-1]]
     last_day_df.reset_index(inplace=True)
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
     investment_period = df[df['Date'] >= last_day_df['Date'].values[0] - pd.DateOffset(years=time)]
 
-    sns.lineplot(x='Date', y=stock_selected, data=df, label='Historical Prices')
-    sns.lineplot(x='Date', y=stock_selected, data=investment_period, label=f'Investment Period ({time} years)', color='orange')
+    sns.lineplot(x='Date', y=stock_selected, data=df)
+    sns.lineplot(x='Date', y=stock_selected, data=investment_period, color='orange')
 
     plt.title(f'{stock_selected} Stock Performance Over Time')
     plt.xlabel('Date')

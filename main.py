@@ -158,16 +158,21 @@ try:
     rate = investment_df._get_value(0, 'Return Value')
     returns = capm_functions.calculate_amount(float(principle), float(time), float(rate))
 
-    # Historical stock prices with investment period visualization
-    st.markdown('### 📊 Historical Stock Prices with Investment Period')
-    capm_functions.plot_investment_period(stocks_df, stock_selected, time)
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        # Historical stock prices with investment period visualization
+        st.markdown('### 📊 Historical Stock Prices with Investment Period')
+        capm_functions.plot_investment_period(stocks_df, stock_selected, time)
 
-    if principle > returns:
-        color = 'red'
-    else:
-        color = 'green'
-    st.write(f'After {time} year(s), This stock will be valued at: :{color}[₹{returns}]')
-    st.write(f'Expected Profit in {time} year(s): :{color}[₹{round((returns - principle), 2)}]')
+    with col2:
+        if principle > returns:
+            color = 'red'
+        else:
+            color = 'green'
+
+        st.markdown('### 💸 Returns! 🤑')
+        st.write(f'After {time} year(s), This stock will be valued at: :{color}[₹{returns}]')
+        st.write(f'Expected Profit in {time} year(s): :{color}[₹{round((returns - principle), 2)}]')
 
 except:
     st.write("Try Again!")
